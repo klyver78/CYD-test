@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f2e9">
+  <title>Installer CYD Bamse</title>
+  <style>
+    :root { color-scheme: light; --ink:#292820; --muted:#66665c; --paper:#f8f2e9; --card:#fffdf9; --accent:#a74532; --line:#e7ded1; }
+    * { box-sizing:border-box }
+    body { margin:0; min-height:100vh; background:var(--paper); color:var(--ink); font:16px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    main { width:min(760px, calc(100% - 32px)); margin:52px auto; }
+    header { display:flex; align-items:center; justify-content:space-between; gap:20px; margin-bottom:28px; }
+    .brand { font-size:14px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+    button.lang { border:1px solid var(--line); border-radius:999px; background:var(--card); color:var(--ink); padding:9px 14px; font:inherit; font-size:14px; cursor:pointer; }
+    .card { background:var(--card); border:1px solid var(--line); border-radius:24px; padding:clamp(24px,6vw,48px); box-shadow:0 16px 50px #47351b0d; }
+    .bear { font-size:64px; line-height:1; margin-bottom:18px; }
+    h1 { font-size:clamp(32px,7vw,48px); line-height:1.08; letter-spacing:-.04em; margin:0 0 16px; }
+    .lead { color:var(--muted); font-size:18px; max-width:58ch; margin:0 0 28px; }
+    .install { display:inline-flex; align-items:center; gap:10px; min-height:54px; border:0; border-radius:14px; padding:0 22px; background:var(--accent); color:white; font:700 16px system-ui,sans-serif; cursor:pointer; }
+    .install[aria-disabled="true"] { opacity:.45; cursor:not-allowed; }
+    .hint { margin:12px 0 30px; color:var(--muted); font-size:14px; }
+    h2 { font-size:18px; margin:30px 0 10px; }
+    ol { padding-left:24px; margin:0; }
+    li { padding:5px 0 5px 4px; }
+    .note { margin-top:28px; padding:16px 18px; border-radius:14px; background:#f5eee3; color:#514b40; font-size:14px; }
+    a { color:var(--accent); }
+    footer { color:var(--muted); text-align:center; font-size:13px; margin:20px 0 0; }
+    @media (max-width:520px) { main { margin:22px auto } header { margin-bottom:18px } .card { border-radius:18px } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="brand" data-da="CYD · Bamse" data-en="CYD · Teddy">CYD · Bamse</div>
+      <button class="lang" id="language" type="button" aria-label="Switch language">English</button>
+    </header>
+    <section class="card">
+      <div class="bear" aria-hidden="true">🧸</div>
+      <h1 data-da="Giv din CYD en bamse" data-en="Put a teddy on your CYD">Giv din CYD en bamse</h1>
+      <p class="lead" data-da="Installer bamsen direkte fra denne side. Den blinker, hilser og skifter mellem dansk og engelsk." data-en="Install the teddy directly from this page. It blinks, says hello, and switches between Danish and English.">Installer bamsen direkte fra denne side. Den blinker, hilser og skifter mellem dansk og engelsk.</p>
+      <esp-web-install-button id="installer" manifest="./manifest.json">
+        <button class="install" slot="activate" data-da="Installer på CYD" data-en="Install on CYD">Installer på CYD</button>
+        <span slot="unsupported" data-da="Brug Chrome eller Edge på en computer med USB." data-en="Use Chrome or Edge on a computer with USB.">Brug Chrome eller Edge på en computer med USB.</span>
+        <span slot="not-allowed" data-da="Giv siden adgang til USB-enheder i browseren." data-en="Allow this page to access USB devices in your browser.">Giv siden adgang til USB-enheder i browseren.</span>
+      </esp-web-install-button>
+      <p class="hint" data-da="Tilslut CYD’en med et USB-datakabel, og vælg dens serielle port, når browseren spørger." data-en="Connect the CYD with a USB data cable, then select its serial port when prompted by the browser.">Tilslut CYD’en med et USB-datakabel, og vælg dens serielle port, når browseren spørger.</p>
+
+      <h2 data-da="Sådan gør du" data-en="How to install">Sådan gør du</h2>
+      <ol>
+        <li data-da="Åbn siden i Chrome eller Edge på en computer." data-en="Open this page in Chrome or Edge on a computer.">Åbn siden i Chrome eller Edge på en computer.</li>
+        <li data-da="Tilslut CYD’en med et USB-datakabel, og tryk på Installer." data-en="Connect the CYD with a USB data cable and press Install.">Tilslut CYD’en med et USB-datakabel, og tryk på Installer.</li>
+        <li data-da="Vælg USB-porten til CYD’en, og bekræft installationen." data-en="Select the CYD USB port and confirm installation.">Vælg USB-porten til CYD’en, og bekræft installationen.</li>
+        <li data-da="Når den genstarter, tryk på skærmen for at hilse. Tryk DA / EN for at skifte sprog." data-en="After it restarts, tap the screen to say hello. Tap DA / EN to switch language.">Når den genstarter, tryk på skærmen for at hilse. Tryk DA / EN for at skifte sprog.</li>
+      </ol>
+      <div class="note" data-da="Installationen overskriver den eksisterende firmware på CYD’en. Standardmodellen har ikke højttaler, så “Hej!” vises på skærmen, mens bamsen bevæger munden." data-en="Installation replaces the existing firmware on the CYD. The standard model has no speaker, so “Hello!” appears on screen while the teddy moves its mouth.">Installationen overskriver den eksisterende firmware på CYD’en. Standardmodellen har ikke højttaler, så “Hej!” vises på skærmen, mens bamsen bevæger munden.</div>
+    </section>
+    <footer><span data-da="Firmware til ESP32-2432S028R ·" data-en="Firmware for ESP32-2432S028R ·">Firmware til ESP32-2432S028R ·</span> <a href="https://github.com/klyver78/CYD-test" data-da="Kildekode på GitHub" data-en="Source on GitHub">Kildekode på GitHub</a></footer>
+  </main>
+  <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
+  <script>
+    const toggle = document.querySelector("#language");
+    let lang = localStorage.getItem("cyd-bamse-language") || (navigator.language.toLowerCase().startsWith("da") ? "da" : "en");
+    function renderLanguage() {
+      document.documentElement.lang = lang;
+      document.querySelectorAll("[data-da][data-en]").forEach(el => { el.textContent = el.dataset[lang]; });
+      toggle.textContent = lang === "da" ? "English" : "Dansk";
+      toggle.setAttribute("aria-label", lang === "da" ? "Skift sprog" : "Switch language");
+    }
+    toggle.addEventListener("click", () => {
+      lang = lang === "da" ? "en" : "da";
+      localStorage.setItem("cyd-bamse-language", lang);
+      renderLanguage();
+    });
+    renderLanguage();
+  </script>
+</body>
+</html>
