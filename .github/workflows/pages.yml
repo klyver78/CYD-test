@@ -1,0 +1,61 @@
+name: Build and deploy web installer
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install PlatformIO
+        run: pip install platformio
+
+      - name: Build firmware
+        run: pio run -e cyd
+
+      - name: Assemble Pages site
+        shell: bash
+        run: |
+          mkdir -p _site/firmware
+          cp web/index.html web/manifest.json _site/
+          cp .pio/build/cyd/bootloader.bin _site/firmware/
+          cp .pio/build/cyd/partitions.bin _site/firmware/
+          cp .pio/build/cyd/firmware.bin _site/firmware/firmware.bin
+          BOOT_APP0="$(find "$HOME/.platformio/packages" -name boot_app0.bin -print -quit)"
+          test -n "$BOOT_APP0"
+          cp "$BOOT_APP0" _site/firmware/boot_app0.bin
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
