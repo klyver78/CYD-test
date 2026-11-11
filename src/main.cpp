@@ -77,12 +77,12 @@ void drawLanguageButton() {
 
 // The bubble sits above the bear, so showing or clearing it doesn't touch the face.
 void drawGreeting(bool visible) {
-  const int x = 116, y = 4, w = 82, h = 34;
+  const int x = 12, y = 3, w = 218, h = 38;
   tft.fillRoundRect(x, y, w, h, 10, visible ? WHITE : BG);
   if (visible) {
     tft.setTextColor(INK, WHITE);
     tft.setTextDatum(MC_DATUM);
-    tft.drawString(language == DANISH ? "Hej!" : "Hello!", x + w / 2, y + h / 2, 4);
+    tft.drawString(language == DANISH ? "Det skal nok gå alt sammen" : "Everything will be okay", x + w / 2, y + h / 2, 2);
   }
 }
 
@@ -120,7 +120,7 @@ void drawScene() {
   drawLanguageButton();
   tft.setTextColor(WHITE, BG);
   tft.setTextDatum(MC_DATUM);
-  tft.drawString(language == DANISH ? "Tag en dyb indånding, det skal nok gå.!" : "Take a deep breath, it will be okay!", 160, 226, 1);
+  tft.drawString("Alfa Laval D365", 160, 226, 1);
   drawGreeting(false);
 }
 
@@ -165,7 +165,7 @@ void loop() {
       tft.drawString(language == DANISH ? "Tag en dyb indånding, det skal nok gå.!" : "Take a deep breath, it will be okay!", 160, 226, 1);
       if (now < greetingUntil) drawGreeting(true);
     } else {
-      greetingUntil = now + 1400;
+      greetingUntil = now + 3000;
       nextMouthFrame = now;
     }
   }
