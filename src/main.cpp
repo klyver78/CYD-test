@@ -120,7 +120,7 @@ void drawScene() {
   drawLanguageButton();
   tft.setTextColor(WHITE, BG);
   tft.setTextDatum(MC_DATUM);
-  tft.drawString(language == DANISH ? "Tag en dyb indånding, det skal nok gå.!" : "Take a deep breath, it will be okay!", 157, 226, 2);
+  tft.drawString(language == DANISH ? "Tag en dyb indånding, det skal nok gå.!" : "Take a deep breath, it will be okay!", 160, 226, 1);
   drawGreeting(false);
 }
 
@@ -162,7 +162,7 @@ void loop() {
       tft.fillRect(0, 214, W, 26, BG);
       tft.setTextColor(WHITE, BG);
       tft.setTextDatum(MC_DATUM);
-      tft.drawString(language == DANISH ? "Tag en dyb indånding, det skal nok gå.!" : "Take a deep breath, it will be okay!", 157, 226, 2);
+      tft.drawString(language == DANISH ? "Tag en dyb indånding, det skal nok gå.!" : "Take a deep breath, it will be okay!", 160, 226, 1);
       if (now < greetingUntil) drawGreeting(true);
     } else {
       greetingUntil = now + 1400;
