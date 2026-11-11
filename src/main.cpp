@@ -29,16 +29,15 @@ uint32_t greetingUntil = 0;
 bool mouthOpen = false;
 uint32_t nextMouthFrame = 0;
 
-static const uint16_t BG       = tft.color565(255, 231, 202);
-static const uint16_t FUR      = tft.color565(190, 119, 61);
-static const uint16_t FUR_DARK = tft.color565(110,  60, 33);
-static const uint16_t MUZZLE   = tft.color565(250, 220, 176);
-static const uint16_t INNER    = tft.color565(235, 162, 151);
-static const uint16_t INK      = tft.color565(47, 36, 33);
-static const uint16_t ACCENT   = tft.color565(237, 101, 75);
-static const uint16_t WHITE    = tft.color565(255, 255, 255);
+static const uint16_t BG       = 0xFF59;
+static const uint16_t FUR      = 0xBEEF;
+static const uint16_t FUR_DARK = 0x6DE4;
+static const uint16_t MUZZLE   = 0xFE36;
+static const uint16_t INNER    = 0xED32;
+static const uint16_t INK      = 0x3104;
+static const uint16_t ACCENT   = 0xEB69;
+static const uint16_t WHITE    = 0xFFFF;
 
-// Named helper avoids depending on a particular TFT_eSPI colour macro set.
 
 void drawEye(int x, bool closed) {
   if (closed) {
@@ -54,7 +53,7 @@ void drawBear(bool blink, bool openMouth) {
   tft.fillScreen(BG);
 
   // Soft ground shadow and round teddy body.
-  tft.fillEllipse(156, 216, 73, 9, tft.color565(224, 196, 161));
+  tft.fillEllipse(156, 216, 73, 9, 0xE638);
   tft.fillEllipse(157, 185, 68, 48, FUR);
   tft.fillEllipse(157, 194, 27, 25, MUZZLE);
   tft.fillCircle(117, 177, 21, FUR);
