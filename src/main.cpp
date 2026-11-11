@@ -68,21 +68,26 @@ void drawMouth(bool open) {
 }
 
 void drawLanguageButton() {
-  tft.fillRoundRect(244, 8, 68, 30, 8, WHITE);
-  tft.drawRoundRect(244, 8, 68, 30, 8, ACCENT);
+  tft.fillRoundRect(8, 8, 68, 30, 8, WHITE);
+  tft.drawRoundRect(8, 8, 68, 30, 8, ACCENT);
   tft.setTextColor(INK, WHITE);
   tft.setTextDatum(MC_DATUM);
-  tft.drawString(language == DANISH ? "DA  /  EN" : "EN  /  DA", 278, 23, 2);
+  tft.drawString(language == DANISH ? "DA  /  EN" : "EN  /  DA", 42, 23, 2);
 }
 
 // The bubble sits above the bear, so showing or clearing it doesn't touch the face.
 void drawGreeting(bool visible) {
-  const int x = 12, y = 3, w = 218, h = 38;
-  tft.fillRoundRect(x, y, w, h, 10, visible ? WHITE : BG);
+  const int x = 167, y = 4, w = 143, h = 31;
+  if (visible) {
+    tft.fillTriangle(x, 15, x - 15, 21, x, 27, WHITE);
+    tft.fillRoundRect(x, y, w, h, 10, WHITE);
+  } else {
+    tft.fillRect(x - 16, y - 1, w + 17, h + 2, BG);
+  }
   if (visible) {
     tft.setTextColor(INK, WHITE);
     tft.setTextDatum(MC_DATUM);
-    tft.drawString(language == DANISH ? "Det skal nok gå alt sammen" : "Everything will be okay", x + w / 2, y + h / 2, 2);
+    tft.drawString(language == DANISH ? "Alt bliver godt" : "Everything will be okay", x + w / 2, y + h / 2, 2);
   }
 }
 
@@ -156,7 +161,7 @@ void loop() {
   const uint32_t now = millis();
   int x, y;
   if (readTap(x, y)) {
-    if (x >= 235 && y <= 45) {
+    if (x <= 85 && y <= 45) {
       language = language == DANISH ? ENGLISH : DANISH;
       drawLanguageButton();
       tft.fillRect(0, 214, W, 26, BG);
